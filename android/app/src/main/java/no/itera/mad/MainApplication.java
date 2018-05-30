@@ -1,4 +1,4 @@
-package com.bank;
+package no.itera.mad;
 
 import android.app.Application;
 

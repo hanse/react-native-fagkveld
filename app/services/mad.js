@@ -76,7 +76,7 @@ type UserDto = {
   lastName: string
 };
 
-export async function fetchCurrentUser(token: ?string): Promise<UserDto> {
+export async function fetchCurrentUser(token: string): Promise<UserDto> {
   const result: HttpResult<UserDto> = await request('/users/me/', {
     headers: {
       Authorization: JWT(token)

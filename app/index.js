@@ -1,18 +1,15 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
-import Button from './components/Button';
+import { StyleSheet, View } from 'react-native';
+import Navigator from './screens';
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          title="Make a Difference"
-          onPress={() => Alert.alert('Hello!')}
-        />
+        <Navigator />
       </View>
     );
   }
@@ -20,9 +17,6 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF'
+    flex: 1
   }
 });

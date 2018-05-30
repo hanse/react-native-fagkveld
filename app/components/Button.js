@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, type Node } from 'react';
+import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 type Props = {

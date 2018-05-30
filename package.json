@@ -6,11 +6,20 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "flow": "flow",
+    "lint": "eslint app --ignore-path .gitignore",
     "ios": "react-native run-ios",
     "android": "react-native run-android"
   },
   "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.48.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.8.2",
     "flow-bin": "0.67",
+    "prettier": "^1.13.2",
     "react": "16.3.1",
     "react-native": "0.55.4"
   },
@@ -22,5 +31,39 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "eslintConfig": {
+    "extends": [
+      "google",
+      "plugin:flowtype/recommended",
+      "plugin:react/recommended",
+      "prettier",
+      "prettier/flowtype",
+      "prettier/react"
+    ],
+    "plugins": ["flowtype", "react", "prettier"],
+    "parserOptions": {
+      "ecmaVersion": 2016,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": [
+        2,
+        {
+          "singleQuote": true
+        }
+      ],
+      "new-cap": 0,
+      "require-jsdoc": 0,
+      "no-invalid-this": 0,
+      "react/prop-types": 0
+    }
   }
 }

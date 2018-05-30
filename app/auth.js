@@ -18,7 +18,8 @@ type State = {
   token: ?string,
   currentUser: Object,
   login: (token: string) => void,
-  logout: () => void
+  logout: () => void,
+  ready: boolean
 };
 
 export class AuthProvider extends React.Component<Props, State> {
@@ -31,6 +32,7 @@ export class AuthProvider extends React.Component<Props, State> {
   };
 
   state = {
+    ready: false,
     token: null,
     currentUser: {},
     login: this.handleLogin,
@@ -39,7 +41,7 @@ export class AuthProvider extends React.Component<Props, State> {
 
   async componentDidMount() {
     const token = await AsyncStorage.getItem(TOKEN_KEY);
-    this.setState({ token });
+    this.setState({ token, ready: true });
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -64,7 +66,7 @@ export class AuthProvider extends React.Component<Props, State> {
   render() {
     return (
       <AuthContext.Provider value={this.state}>
-        {this.props.children}
+        {this.state.ready ? this.props.children : null}
       </AuthContext.Provider>
     );
   }

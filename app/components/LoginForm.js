@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Alert } from 'react-native';
 import Button from '../components/Button';
 import { fetchAuthToken } from '../services/mad';
 
@@ -40,6 +40,7 @@ export default class LoginForm extends Component<Props, State> {
       this.props.onLoginSuccess(token);
     } catch (error) {
       console.log(error);
+      Alert.alert('Login Failed', "Who's fault might it be?");
       this.setState({ error, loggingIn: false });
     }
   };
@@ -47,7 +48,6 @@ export default class LoginForm extends Component<Props, State> {
   render() {
     return (
       <View>
-        {this.state.error && <Text>Could not log in</Text>}
         <TextInput
           autoCapitalize="none"
           value={this.state.email}

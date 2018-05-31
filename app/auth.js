@@ -44,18 +44,17 @@ export class AuthProvider extends React.Component<Props, State> {
     this.setState({ token, ready: true });
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  async componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.token && this.state.token !== prevState.token) {
-      fetchCurrentUser(this.state.token).then(
-        currentUser => {
-          AsyncStorage.setItem(TOKEN_KEY, this.state.token);
-          this.setState({ currentUser });
-        },
-        error => {
-          // Assume the fetch failed because the token was invalid
-          this.setState({ token: null });
-        }
-      );
+      try {
+        const currentUser = await fetchCurrentUser(this.state.token);
+        AsyncStorage.setItem(TOKEN_KEY, this.state.token);
+        this.setState({ currentUser });
+      } catch (error) {
+        // Assume the fetch failed because the token was invalid
+        console.log(error);
+        this.setState({ token: null });
+      }
     }
 
     if (prevState.token && !this.state.token) {

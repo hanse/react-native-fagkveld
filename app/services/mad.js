@@ -1,11 +1,11 @@
 // @flow
 
-class HTTPError extends Error {
+class HttpError extends Error {
   result: HttpResult<*>;
 }
 
-type HttpResult<TBody> = {
-  body: TBody,
+type HttpResult<T> = {
+  body: T,
   response: Response
 };
 
@@ -34,7 +34,7 @@ async function request<T>(path, options = {}): Promise<HttpResult<T>> {
   };
 
   if (!response.ok) {
-    const error = new HTTPError('Request failed');
+    const error = new HttpError('Request failed');
     error.result = result;
     throw error;
   }
@@ -42,7 +42,7 @@ async function request<T>(path, options = {}): Promise<HttpResult<T>> {
   return result;
 }
 
-function JWT(token: ?string): ?string {
+function jwt(token: ?string): ?string {
   return token ? `JWT ${token}` : undefined;
 }
 
@@ -79,7 +79,7 @@ type UserDto = {
 export async function fetchCurrentUser(token: string): Promise<UserDto> {
   const result: HttpResult<UserDto> = await request('/users/me/', {
     headers: {
-      Authorization: JWT(token)
+      Authorization: jwt(token)
     }
   });
 
@@ -97,7 +97,7 @@ type PaginatedEventsDto = {
 export async function fetchEvents(token: ?string): Promise<Array<EventDto>> {
   const result: HttpResult<PaginatedEventsDto> = await request('/events/', {
     headers: {
-      Authorization: JWT(token)
+      Authorization: jwt(token)
     }
   });
   return result.body.results;

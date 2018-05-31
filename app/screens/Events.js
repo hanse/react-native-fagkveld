@@ -58,7 +58,9 @@ class Events extends Component<Props, State> {
   renderItem = ({ item }) => {
     return (
       <TouchableHighlight
-        onPress={() => this.props.navigation.navigate('EventDetail')}
+        onPress={() =>
+          this.props.navigation.navigate('EventDetail', { event: item })
+        }
       >
         <View style={{ padding: 15, backgroundColor: '#fff' }}>
           <Text style={{ fontSize: 18 }}>{item.name}</Text>

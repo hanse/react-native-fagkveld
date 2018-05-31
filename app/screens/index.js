@@ -8,6 +8,9 @@ import {
 const EventsNavigator = createStackNavigator({
   Index: {
     getScreen: () => require('./Events').default
+  },
+  EventDetail: {
+    getScreen: () => require('./EventDetail').default
   }
 });
 

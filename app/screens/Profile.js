@@ -5,6 +5,7 @@ import { View, Text } from 'react-native';
 import Button from '../components/Button';
 import LoginForm from '../components/LoginForm';
 import { AuthConsumer } from '../auth';
+import { getDepartment } from '../models';
 
 type Props = {};
 
@@ -23,7 +24,7 @@ class Profile extends Component<Props> {
                 <Text style={{ fontSize: 30 }}>
                   {currentUser.firstName} {currentUser.lastName}
                 </Text>
-                <Text>{currentUser.department}</Text>
+                <Text>{getDepartment(currentUser.department)}</Text>
                 <Button title="Logout" onPress={logout} />
               </View>
             ) : (

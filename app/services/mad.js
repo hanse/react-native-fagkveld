@@ -1,5 +1,7 @@
 // @flow
 
+import type { Event, User, Token } from '../models';
+
 class HttpError extends Error {
   result: HttpResult<*>;
 }
@@ -50,8 +52,6 @@ type TokenDto = {
   token: string
 };
 
-type Token = string;
-
 export async function fetchAuthToken(
   email: string,
   password: string
@@ -68,25 +68,34 @@ export async function fetchAuthToken(
 }
 
 type UserDto = {
-  id: number,
-  isStaff: boolean,
-  department: string,
-  email: string,
-  firstName: string,
-  lastName: string
+  id?: number,
+  firstName?: string,
+  lastName?: string,
+  department?: string,
+  connectedAccounts?: Array<string>
 };
 
-export async function fetchCurrentUser(token: string): Promise<UserDto> {
+const mapUserToModel = (userDto: UserDto): User => ({
+  id: userDto.id,
+  firstName: userDto.firstName || 'Pure',
+  lastName: userDto.lastName || 'Madness',
+  department: userDto.department,
+  connectedAccounts: Array.isArray(userDto.connectedAccounts)
+    ? userDto.connectedAccounts
+    : []
+});
+
+export async function fetchCurrentUser(token: string) {
   const result: HttpResult<UserDto> = await request('/users/me/', {
     headers: {
       Authorization: jwt(token)
     }
   });
 
-  return result.body;
+  return mapUserToModel(result.body);
 }
 
-type EventDto = Object;
+type EventDto = Event;
 type PaginatedEventsDto = {
   count: number,
   next: ?string,
@@ -94,11 +103,14 @@ type PaginatedEventsDto = {
   results: Array<EventDto>
 };
 
-export async function fetchEvents(token: ?string): Promise<Array<EventDto>> {
+const mapEventsToModel = (events: Array<EventDto>): Array<Event> => events;
+
+export async function fetchEvents(token: ?string) {
   const result: HttpResult<PaginatedEventsDto> = await request('/events/', {
     headers: {
       Authorization: jwt(token)
     }
   });
-  return result.body.results;
+
+  return mapEventsToModel(result.body.results);
 }

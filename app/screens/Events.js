@@ -10,14 +10,15 @@ import {
 } from 'react-native';
 import { AuthConsumer } from '../auth';
 import { fetchEvents } from '../services/mad';
+import type { Token, Event } from '../models';
 
 type Props = {
-  token: string,
+  token: Token,
   navigation: Object
 };
 
 type State = {
-  events: Array<Object>,
+  events: Array<Event>,
   loading: boolean
 };
 

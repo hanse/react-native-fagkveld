@@ -16,6 +16,8 @@ type State = {
   error: ?Error
 };
 
+const delay = (ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
+
 export default class LoginForm extends Component<Props, State> {
   state = {
     email: '',
@@ -35,6 +37,7 @@ export default class LoginForm extends Component<Props, State> {
 
     try {
       this.setState({ loggingIn: true });
+      await delay(1500);
       const token = await fetchAuthToken(this.state.email, this.state.password);
       this.setState({ loggingIn: false });
       this.props.onLoginSuccess(token);
@@ -47,7 +50,7 @@ export default class LoginForm extends Component<Props, State> {
 
   render() {
     return (
-      <View>
+      <View style={styles.loginForm}>
         <TextInput
           autoCapitalize="none"
           value={this.state.email}
@@ -55,6 +58,8 @@ export default class LoginForm extends Component<Props, State> {
           style={styles.input}
           placeholder="Email"
         />
+
+        <View style={styles.divider} />
 
         <TextInput
           autoCapitalize="none"
@@ -65,7 +70,11 @@ export default class LoginForm extends Component<Props, State> {
           placeholder="Password"
         />
 
-        <Button title="Login" onPress={this.handleSubmit} />
+        <Button
+          title="Login"
+          onPress={this.handleSubmit}
+          loading={this.state.loggingIn}
+        />
       </View>
     );
   }
@@ -73,7 +82,18 @@ export default class LoginForm extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    height: 50,
     fontSize: 16
+  },
+  loginForm: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: '#bbb',
+    backgroundColor: 'white',
+    padding: 20,
+    paddingTop: 15
+  },
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#ccc'
   }
 });

@@ -1,10 +1,16 @@
 // @flow
 
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator
+} from 'react-native';
 
 type Props = {
   title: string,
+  loading?: boolean,
   style?: mixed
 };
 
@@ -21,7 +27,11 @@ class Button extends Component<Props> {
         style={[styles.button, this.props.style]}
         activeOpacity={0.9}
       >
-        <Text style={styles.text}>{this.props.title}</Text>
+        {this.props.loading ? (
+          <ActivityIndicator />
+        ) : (
+          <Text style={styles.text}>{this.props.title}</Text>
+        )}
       </TouchableOpacity>
     );
   }

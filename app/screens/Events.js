@@ -42,12 +42,15 @@ class Events extends Component<Props, State> {
     }
   }
 
-  fetchData = () => {
+  fetchData = async () => {
     this.setState({ loading: true });
-    fetchEvents(this.props.token).then(
-      events => this.setState({ events, loading: false }),
-      error => this.setState({ loading: false })
-    );
+    try {
+      const events = await fetchEvents(this.props.token);
+      this.setState({ events, loading: false });
+    } catch (error) {
+      console.log(error);
+      this.setState({ loading: false });
+    }
   };
 
   keyExtractor = item => `${item.id}`;

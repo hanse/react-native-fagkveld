@@ -20,7 +20,8 @@ export default class Fade extends Component<Props, State> {
 
   componentDidMount() {
     Animated.spring(this.state.animationValue, {
-      toValue: 1
+      toValue: 1,
+      useNativeDriver: true
     }).start();
   }
 

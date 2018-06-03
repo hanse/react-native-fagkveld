@@ -6,7 +6,8 @@ import {
   View,
   FlatList,
   TouchableHighlight,
-  StyleSheet
+  StyleSheet,
+  Animated
 } from 'react-native';
 import { AuthConsumer } from '../auth';
 import { fetchEvents } from '../services/mad';
@@ -19,17 +20,25 @@ type Props = {
 
 type State = {
   events: Array<Event>,
-  loading: boolean
+  loading: boolean,
+  scrollY: Animated.Value,
+  width: number,
+  height: number
 };
 
 const Divider = () => (
   <View style={{ height: StyleSheet.hairlineWidth, backgroundColor: '#ddd' }} />
 );
 
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
 class Events extends Component<Props, State> {
   state = {
     events: [],
-    loading: false
+    loading: false,
+    scrollY: new Animated.Value(0),
+    width: 0,
+    height: 0
   };
 
   componentDidMount() {
@@ -72,12 +81,40 @@ class Events extends Component<Props, State> {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <FlatList
+        <AnimatedFlatList
           data={this.state.events}
           keyExtractor={this.keyExtractor}
           renderItem={this.renderItem}
           ItemSeparatorComponent={Divider}
+          scrollEventThrottle={1}
+          onContentSizeChange={(width, height) => {
+            this.setState({ width, height });
+          }}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+            { useNativeDriver: true }
+          )}
         />
+        {this.state.height && (
+          <Animated.View
+            style={{
+              width: this.state.width,
+              height: 6,
+              backgroundColor: '#CC0B11',
+              borderRadius: 3,
+              marginVertical: 5,
+              transform: [
+                {
+                  scaleX: this.state.scrollY.interpolate({
+                    inputRange: [0, this.state.height / 2],
+                    outputRange: [0.05, 1],
+                    extrapolate: 'clamp'
+                  })
+                }
+              ]
+            }}
+          />
+        )}
       </View>
     );
   }

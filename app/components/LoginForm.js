@@ -26,6 +26,9 @@ export default class LoginForm extends Component<Props, State> {
     error: null
   };
 
+  // $FlowFixMe
+  passwordRef = React.createRef();
+
   handleSubmit = async () => {
     if (
       this.state.email.trim() === '' ||
@@ -53,21 +56,28 @@ export default class LoginForm extends Component<Props, State> {
       <View style={styles.loginForm}>
         <TextInput
           autoCapitalize="none"
+          underlineColorAndroid="transparent"
+          returnKeyType="next"
           value={this.state.email}
           onChangeText={email => this.setState({ email })}
           style={styles.input}
           placeholder="Email"
+          onSubmitEditing={() => this.passwordRef.current.focus()}
         />
 
         <View style={styles.divider} />
 
         <TextInput
+          ref={this.passwordRef}
           autoCapitalize="none"
+          underlineColorAndroid="transparent"
+          returnKeyType="done"
           value={this.state.password}
           secureTextEntry
           onChangeText={password => this.setState({ password })}
           style={styles.input}
           placeholder="Password"
+          onSubmitEditing={this.handleSubmit}
         />
 
         <Button

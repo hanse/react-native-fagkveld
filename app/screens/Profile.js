@@ -1,7 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  Platform
+} from 'react-native';
 import Button from '../components/Button';
 import LoginForm from '../components/LoginForm';
 import { AuthConsumer } from '../auth';
@@ -16,7 +22,7 @@ class Profile extends Component<Props> {
 
   render() {
     return (
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, flex: 1 }}>
         <AuthConsumer>
           {({ token, login, logout, currentUser }) =>
             token !== null ? (
@@ -28,12 +34,16 @@ class Profile extends Component<Props> {
                 <Button title="Logout" onPress={logout} />
               </View>
             ) : (
-              <View>
+              <KeyboardAvoidingView
+                behavior="position"
+                keyboardVerticalOffset={Platform.OS === 'android' ? 25 : 0}
+                style={{ flex: 1 }}
+              >
                 <View
                   style={{
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    height: 150
+                    justifyContent: 'flex-end',
+                    height: 250
                   }}
                 >
                   <Image
@@ -43,7 +53,7 @@ class Profile extends Component<Props> {
                   />
                 </View>
                 <LoginForm onLoginSuccess={login} />
-              </View>
+              </KeyboardAvoidingView>
             )
           }
         </AuthConsumer>

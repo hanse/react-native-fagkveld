@@ -68,6 +68,14 @@ The event detail screen is a JSON dump of the event. We have a lot of informatio
 of the event, a date, event type, public or not, speakers, open for registration etc. Use this information and present it in
 a clean way to the end user. Experiment with the [style](https://facebook.github.io/react-native/docs/style.html) and [layout](https://facebook.github.io/react-native/docs/flexbox.html) properties and maybe some of the native components included in React Native listed in the sidebar of [the docs](https://facebook.github.io/react-native/docs/getting-started.html) if it makes sense.
 
+Maybe you can show the speakers in a list and open their profiles in a new screen when tapping on them?
+
+### Add an image to the profile
+
+Use [Adorable.io](http://avatars.adorable.io/#demo) to add a cute image to the profile screen. `<Image />` supports external URIs!
+
+![Avatar](https://api.adorable.io/avatars/285/Mad@adorable.png)
+
 ### Change profile
 
 Implement a "Change Profile Screen" where the users can update their profiles.

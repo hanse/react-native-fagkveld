@@ -95,6 +95,8 @@ application to your native calendar on the OS.
 There is a <Fade /> component in the components folder that provides a basic fade animation to its children. It is used on the Profile screen. Try changing the animations or add new ones. The [documentation](https://facebook.github.io/react-native/docs/animations.html) covers the Animated API pretty good.
 In the [animated-event](https://github.com/Hanse/react-native-fagkveld/tree/animated-event) branch there is an example of using `Animated.event` to animate based on scroll position.
 
+![](http://g.recordit.co/TOnmjXoo1G.gif)
+
 ## Other Resources
 
 [awesome-react-native](https://github.com/jondot/awesome-react-native) provides a comprehensive list of React Native resources.

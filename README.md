@@ -53,8 +53,10 @@ Some suggestions are:
 
 - Show date in the event cell
 - Show event type in the event cell
-- Group the list on date
-- Style it differently
+- Style it differently. Be creative!
+
+A bit more advanced
+
 - Filter the list on event type (MEETUP or CONFERENCE)
 - Add a search bar
 
@@ -64,6 +66,12 @@ Do you have any other suggestions for that page? Implement them!
 
 The tab bar is missing icons. Can you add some relevant icons? Hint: Look [here](https://reactnavigation.org/docs/en/tab-based-navigation.html)
 for more information about changing the appearance of the tab bar. [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) contains many icons, and you'll also learn to link native libraries.
+
+### Add an image to the profile
+
+Use [Adorable.io](http://avatars.adorable.io/#demo) to add a cute image to the profile screen. `<Image />` supports external URIs through the `source` prop!
+
+![Avatar](https://api.adorable.io/avatars/285/Mad@adorable.png)
 
 ### Implement the event detail screen
 
@@ -116,16 +124,11 @@ a clean way to the end user.
 
 Experiment with the [style](https://facebook.github.io/react-native/docs/style.html) and [layout](https://facebook.github.io/react-native/docs/flexbox.html) properties and maybe some of the native components included in React Native listed in the sidebar of [the docs](https://facebook.github.io/react-native/docs/getting-started.html) if it makes sense.
 
-Maybe you can show the speakers in a list and open their profiles in a new screen when tapping on them?
-
-- Use a `<FlatList />` or just use a list of `<View />`s: `speakers.map(speaker => <View />)`.
-- Use `navigation.navigate()` to enter the new screen
-
-### Add an image to the profile
-
-Use [Adorable.io](http://avatars.adorable.io/#demo) to add a cute image to the profile screen. `<Image />` supports external URIs!
-
-![Avatar](https://api.adorable.io/avatars/285/Mad@adorable.png)
+- Show the event title and description
+- Add a button to register for the event
+- Maybe you can show the speakers in a list and open their profiles in a new screen when tapping on them?
+  - Use a `<FlatList />` or just use a list of `<View />`s: `speakers.map(speaker => <View />)`.
+  - Use `navigation.navigate()` to enter the new screen (remember to define the screen in `screens/index.js`!)
 
 ### Change profile
 

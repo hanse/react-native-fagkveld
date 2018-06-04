@@ -14,11 +14,14 @@ Make a difference making a different application
 
 - Clone this repository
 - Run `yarn` from your command line and then run `yarn start`
+  - `yarn start` will start the Metro bundler that bundles the JavaScript
 - Run `yarn ios` for iOS or run `yarn android` for Android in a new shell
 
-You can change iOS Simulator by using `--simulator "iPhone X"`.
+You can change iOS Simulator by adding the flag `--simulator "iPhone X"`.
 
 If you want to run the application on your own phone, follow the directions [here](https://facebook.github.io/react-native/docs/running-on-device.html)
+
+To debug your application do the Shake Gesture (<kbd>^⌘Z</kbd> on iOS Simulator) and press `Debug JS Remotely`. This will open the Chrome DevTools.
 
 ## Make a difference making a different MAD application
 
@@ -66,9 +69,57 @@ for more information about changing the appearance of the tab bar. [react-native
 
 The event detail screen is a JSON dump of the event. We have a lot of information we can use here. We have a description
 of the event, a date, event type, public or not, speakers, open for registration etc. Use this information and present it in
-a clean way to the end user. Experiment with the [style](https://facebook.github.io/react-native/docs/style.html) and [layout](https://facebook.github.io/react-native/docs/flexbox.html) properties and maybe some of the native components included in React Native listed in the sidebar of [the docs](https://facebook.github.io/react-native/docs/getting-started.html) if it makes sense.
+a clean way to the end user.
+
+```javascript
+{
+  "id": 21,
+  "name": "Fagkveld: React Native",
+  "date": "2018-06-05",
+  "description": "**Kursbeskrivelse**\r\n\r\nKurset vil starte med en kort introduksjon til React Native. Hva er det, hvorfor bør man bruke det og hvor passer det i React-landskapet? Deretter vil vi se på hvordan man praktisk kan komme i gang ved å titte på en eksempelapplikasjon. Til slutt skal vi dykke litt dypere ned i React Native-arkitekturen og se litt på hvordan det henger sammen.\r\n\r\nNår vi er ferdige med å snakke er det fritt fram for å lage sin egen app basert på et lite skjelett og et enkelt API. \r\n\r\n**Hva bør gjøres før du kommer:**\r\n\r\nGå til [facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html) og trykk på “Building Projects with Native Code”. Følg de ulike stegene for ditt operativsystem og de plattformene du ønsker å nå (iOS og/eller Android). Ta med egen mobil + kabel om du vil kjøre på din egen enhet!",
+  "eventType": "MEETUP",
+  "foodChoices": [],
+  "beverageChoices": [],
+  "isPublic": false,
+  "isPublished": true,
+  "speakers": [
+    {
+      "id": 49,
+      "firstName": "Sindre",
+      "lastName": "Magnussen",
+      "department": "TCC_TECHNOLOGY",
+      "dateJoined": "2017-02-06T08:26:54.052102Z"
+    },
+    {
+      "id": 155,
+      "firstName": "Hans-Kristian",
+      "lastName": "Koren",
+      "department": "TCC_TECHNOLOGY",
+      "dateJoined": "2017-03-07T07:17:54.399539Z"
+    },
+    {
+      "id": 204,
+      "firstName": "Andreas",
+      "lastName": "Drivenes",
+      "department": "TCC_TECHNOLOGY",
+      "dateJoined": "2018-02-12T08:07:28.163120Z"
+    }
+  ],
+  "talks": [],
+  "timeslots": [],
+  "startTime": null,
+  "endTime": null,
+  "registrationDeadline": null,
+  "isRegistrationOpen": true
+}
+```
+
+Experiment with the [style](https://facebook.github.io/react-native/docs/style.html) and [layout](https://facebook.github.io/react-native/docs/flexbox.html) properties and maybe some of the native components included in React Native listed in the sidebar of [the docs](https://facebook.github.io/react-native/docs/getting-started.html) if it makes sense.
 
 Maybe you can show the speakers in a list and open their profiles in a new screen when tapping on them?
+
+- Use a `<FlatList />` or just use a list of `<View />`s: `speakers.map(speaker => <View />)`.
+- Use `navigation.navigate()` to enter the new screen
 
 ### Add an image to the profile
 
@@ -96,6 +147,8 @@ There is a <Fade /> component in the components folder that provides a basic fad
 In the [animated-event](https://github.com/Hanse/react-native-fagkveld/tree/animated-event) branch there is an example of using `Animated.event` to animate based on scroll position.
 
 ![](http://g.recordit.co/TOnmjXoo1G.gif)
+
+The possibilities are endless. Implement and do whatever you want!
 
 ## Other Resources
 

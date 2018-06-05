@@ -125,10 +125,11 @@ a clean way to the end user.
 Experiment with the [style](https://facebook.github.io/react-native/docs/style.html) and [layout](https://facebook.github.io/react-native/docs/flexbox.html) properties and maybe some of the native components included in React Native listed in the sidebar of [the docs](https://facebook.github.io/react-native/docs/getting-started.html) if it makes sense.
 
 - Show the event title and description
-- Add a button to register for the event
+- Add a `<Button />` to register for the event
 - Maybe you can show the speakers in a list and open their profiles in a new screen when tapping on them?
   - Use a `<FlatList />` or just use a list of `<View />`s: `speakers.map(speaker => <View />)`.
   - Use `navigation.navigate()` to enter the new screen (remember to define the screen in `screens/index.js`!)
+- [Add some buttons](https://reactnavigation.org/docs/en/header-buttons.html) to the navigation header?
 
 ### Change profile
 
